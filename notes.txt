@@ -1,0 +1,74 @@
+venv\scripts\activate.bat
+uvicorn app.main:app --reload
+(for encryption:)
+pip install passlib[bcrypt]
+_________________
+A request body is a data that client sends to API
+A response body is a data that API sends to client
+
+HTTPS requests methods are used to send client data to API.
+(for eg- POST, GET, PUT, PATCH etc.)
+POST is similar to GET; the difference lies in the fact that in GET,we don't send any data along with the request. GET is pure request to API server. Hence GET is not secured. In POST, data is sent along with request which can be anything (even an input). POST is secured.
+Requests in which we send data are: POST, PUT, DELETE, PATCH.
+
+DATABASE COMMANDS:
+
+'
+SELECT * from products where price = 1 or price = 2 or price = 3;
+SELECT * from products where price >= 1 and price <= 3;
+'
+can be substitued for-
+SELECT * from products where price in (1,2,3);
+-------------------------->
+
+'
+SELECT * from products where quantity !=0;
+'
+can be substitued for-
+SELECT * from products where quantity <> 0;
+-------------------------->
+
+'
+If you work at gaming console store and want every xbox console's data then you how do you search for that? given you have a name column.
+'
+answer-
+SELECT * from products where name like 'xbox%';
+(can also be used for searching products that start with a certain letter and for that just do 'a%' where a can be any letter of your choice)(if I want the opposite, i'll just use 'not like' instead of 'like')
+-------------------------->
+'
+If you just want to search for anything in the database that includes certain letters then how do you do that? given you have a coloumn that inputs string.
+'
+answer-
+SELECT * from products where name like '%en%';
+(where 'en' can be any set of letter you wish to search)
+-------------------------->
+
+'
+order by multiple conditions?
+'
+answer-
+SELECT * from products order by price asc, inventory desc;
+-------------------------->
+
+'
+how to limit how much results you want?
+'
+answer-
+SELECT * from products limit 10;
+SELECT * from products where price > 0 limit 5;
+-------------------------->
+
+'
+what if you don't want first few results in your search?
+'
+answer-
+SELECT * from products offset 3;
+(where 3 can be any other number depending on your requirement)
+-------------------------->
+
+'
+whenever I insert a value in table, I want it to return the result.
+'
+INSERT into products (...) VALUES (...) returning *;
+(the not-null constraints table should be included in the table and the table can have any order but the values show be given wrt to the order of the table.)
+

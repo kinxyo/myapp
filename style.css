@@ -1,0 +1,84 @@
+.run {
+    background-color: #000;
+    color: #aaaaaa;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    top: 45%;
+    left: 45%;
+    position: fixed; /* will probably change */
+}
+
+.run:hover {
+    animation: run 1s infinite;
+    color: aliceblue;
+    opacity: 70%;
+}
+
+@keyframes run {
+    0% {
+        background-color: rgb(163, 127, 255);
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: rgb(127, 255, 131);
+    }
+    100% {
+        background-color: rgb(239, 167, 59);
+    }
+}
+
+body {
+    background-color: #1e1d1d;
+}
+
+.mp {
+    background-color: #df3d3d;
+    color: #aaaaaa;
+    height: 2px;
+    width: 2px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    animation : mp 3s ease infinite alternate;   
+    transition: 1s;
+    border-radius: 25px;
+}
+
+.mp:hover {
+    height: 300px;
+    width: 300px;
+    transition: 1s;
+}
+
+@keyframes mp {
+    0% {
+        transform: translate(680px, 433px);
+    }
+    20% {
+        background-color: rgb(239, 167, 59);
+        transform: translate(704px, 433px);
+    }
+    40% {
+        background-color: rgb(27, 224, 122);
+        transform: translate(728px, 433px);
+    }
+    60% {
+        background-color: rgb(59, 146, 239);
+        transform: translate(752px, 433px);
+    }
+    80% {
+        background-color: rgb(5, 5, 138);
+        transform: translate(776px, 433px);
+    }
+    100% {
+        background-color: rgb(86, 59, 239);
+        transform: translate(800px, 433px);
+    }
+}
