@@ -1,3 +1,16 @@
+body{
+    background: url("bg.jpg");
+    background-size: 120%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    animation: bg 8s ease infinite forwards alternate;
+}
+
+@keyframes bg {
+    from {background-position: 0% 90%;}
+    to {background-position: 100% 90%;}
+}
+
 .run {
     background-color: #000;
     color: #aaaaaa;

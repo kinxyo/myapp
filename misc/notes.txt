@@ -72,3 +72,26 @@ whenever I insert a value in table, I want it to return the result.
 INSERT into products (...) VALUES (...) returning *;
 (the not-null constraints table should be included in the table and the table can have any order but the values show be given wrt to the order of the table.)
 
+--------->
+IMPORTANT THINGS TO REMEMBER:
+
+'''
+@app.post("/searchid")
+def sid(u: users):
+    cur.execute("SELECT id FROM users where email = %s", (u.email,))
+    res = cur.fetchone()
+    return f"{u.email}'s ID: {res['id']}"
+'''
+I was stuck on this function for 2 days because it was return value.error missing. I was providing the email field in the http request and was baffled how I was getting such an error.
+well, now I understand that whenever a pydantic model is called, the exact schema defined should be obeyed. I cannot leave any field alone, meaning I need to provide everything in the https request even if I'm not returning all the values. This is the correct http request for the above function:
+'''
+{
+  "email": "kinjalk@gmail.com",
+  "password": " "
+}
+'''
+Output:
+>> "kinjalk@gmail.com's ID: 29"
+--------------------------------->
+JTW TOKENS:
+

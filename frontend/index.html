@@ -12,7 +12,6 @@
     <div>
         <button class="run">LOADING...</button>
     </div>
-
     <script>
         $(document).ready(function(){
             $(".run").hover(function(){
@@ -24,6 +23,18 @@
                 $(".mp").show();
             })
         })
+    </script>
+    <script>
+        $(document).ready(function(){
+            $(".run").click(function(){
+                $("body").css({"background": "url(yo.jpg)","background-color": "#201f1f"});
+            });
+        });
+        $(document).ready(function(){
+             $(".run").mouseleave(function(){
+                 $("body").css({"background": "url('bg.jpg')","background-size": "120%","background-repeat": "no-repeat","background-attachment": "fixed","animation": "bg 8s ease infinite forwards alternate"});
+            }); 
+        }); 
     </script>
 
 <div class="mp">
