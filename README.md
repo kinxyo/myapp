@@ -1,0 +1,3 @@
+This is just a personal project where I'm learning and creating something according to my aptitude and will shape it to be meaningful as I continue to gain mastery over it.
+I expect this to be completed by this year.
+Currently my idea for this project is very vague: Basically a redesigned (original/unique) UI for social media that runs on FastApi. I am more focused on the learning part and trying everything rather than the actual creation rn which might make this repository look like mess but that's how I always learn things. It's more efficient for me to just dive in and soak everything gradually. I'm also creating little-by-little side-by-side but once I'll start focusing on it, the repo will look clean (cuz I personally like clean repos).
