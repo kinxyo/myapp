@@ -93,5 +93,9 @@ well, now I understand that whenever a pydantic model is called, the exact schem
 Output:
 >> "kinjalk@gmail.com's ID: 29"
 --------------------------------->
-JTW TOKENS:
 
+VERY IMPORTANT:
+
+"pip freeze" ==> for all the modules installed
+"pip freeze > requirements.txt" ==> for storing the name of packages and versions installed in a file called requiremenets.txt
+"pip install -r requiremenets.txt" ==> install all the modules required.

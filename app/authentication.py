@@ -1,5 +1,6 @@
 #IMPORTING LIBRARIES----------------->
-from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
+from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter, Form, Request
+from fastapi.templating import Jinja2Templates
 from fastapi.params import Body
 from pydantic import BaseModel, EmailStr
 from datetime import datetime, timedelta
@@ -11,8 +12,10 @@ import time
 from typing import Optional
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
+
 # CREATING ROUTER----------------->
 router = APIRouter()
+templates = Jinja2Templates(directory="frontend")
 
 # CONNECTING TO DATABASE----------------->
 while True:
@@ -35,16 +38,13 @@ class tokendata(BaseModel):
 
 # USER FUNCTIONS----------------->
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def cuser(u: users):
-    # hashing the password
-    # u.password = pwd.hash(u.password)
+# def cuser(u: users):
+def cuser(email: str = Form(), password: str = Form()):
     try:
-        # print(akjhsdkj)
-        cur.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (u.email, pwd.hash(u.password)))
+        cur.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, pwd.hash(password)))
         conn.commit()
-        return {u.email: "Registered"}
+        return {email: "Registered"}
     except:
-        # print("exception working")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User already exists with that email")
 
 @router.get("/")
@@ -90,7 +90,7 @@ def uuser(id: str, u: users):
 #AUTHENTICATION----------------->
 pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-#authentication setup
+#authentication setup (also need to be shifted to env file)
 key = "secret" 
 algorithm = "HS256"
 tokenexp = 30
@@ -103,15 +103,27 @@ def create_access_token(data: dict):
     return encoded_jwt
 
 @router.post("/login")
-def login(u: OAuth2PasswordRequestForm = Depends()):
-    cur.execute("SELECT * FROM users WHERE email = %s", (u.username,))
+async def login(request: Request, username: str = Form(), password: str = Form()):
+# async def login(request: Request, u: OAuth2PasswordRequestForm = Depends(), username: str = Form(), password: str = Form()):
+# def login(u: OAuth2PasswordRequestForm = Depends()):
+    # # u.username = username
+    # u.password = password
+    # print(u.username)
+    # print(u.password)
+    # return "cool"
+    # cur.execute("SELECT * FROM users WHERE email = %s", (u.username,))
+    cur.execute("SELECT * FROM users WHERE email = %s", (username,))
     res = cur.fetchone()
     if not res:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    if not pwd.verify(u.password, res['password']):
+    # if not pwd.verify(u.password, res['password']):
+    if not pwd.verify(password, res['password']):
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail="Incorrect password")
-    access_token = create_access_token(data={"sub": u.username})
-    return {"success": True, "access_token": access_token, "token_type": "bearer"}
+    access_token = create_access_token(data={"sub": username})
+    # print(access_token)
+    return access_token
+    # return {access_token: templates.TemplateResponse("index.html", {"request": request})}
+    # return templates.TemplateResponse("index.html", {"request": request})
 
 def verify_access_token(token: str = Depends(OAuth2PasswordBearer(tokenUrl="/login"))):
     try:

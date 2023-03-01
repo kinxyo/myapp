@@ -1,0 +1,14 @@
+GOLDEN YELLOW:
+background-color: #edcb35c0;
+
+STRONG CYAN:
+background-color: #1d9874c0;
+
+SKY BLUE:
+background-color: #35c5edc0;  
+
+LIQUID PURPLE:
+background-color: #9735edc0; 
+
+LIGHT WHITE:
+background-color: #ffffffc0;
